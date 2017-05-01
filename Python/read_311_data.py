@@ -32,7 +32,25 @@ df_des.rename(columns = rename_dict, inplace = True)
 
 df_des['address'] = df_des['ADDRESS'].apply(add_standardize)
 
+
 df_des['boro'] = df_des['BORO'].apply(boro)
+
+df_des_add = \
+df_des[(df_des['address'].notnull()) & (df_des['ZIPCODE'].notnull())]
+
+df_des_add['State'] = 'New York'
+df_des_add['ZIPCODE'] = df_des_add['ZIPCODE'].apply(int)
+df_des_add['address_formatted'] = df_des_add\
+.apply(lambda x: x['address'] + ', ' + x['boro'] + \
+', New York, ' + str(int(x['ZIPCODE'])) ,1)
+
+for s in range(df_des_add.shape[0]/1000+1):    
+    start = 1000*s
+    df_des_add[['address','boro','State','ZIPCODE']][start:start+1000]\
+    .to_csv(csv_path + "Batch/" + str(s) + 'batch.csv',
+            header = False)
+
+
 df_des[df_des['ADDRESS'].notnull()]\
 [['CAMIS','ADDRESS','ZIPCODE','boro']]\
 .to_csv(dta_path + 'NYC_rest.csv', index = False)
