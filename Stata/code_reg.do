@@ -1,24 +1,7 @@
 set more off
 
 cd "~/Desktop/NYC Food Inspection/Data/DTA"
-use code.dta, clear
-
-cd "~/Desktop/NYC Food Inspection/Script/Stata"
-
-do pre_process2.do
-
-//log using check.txt, replace
-/*
-foreach v of varlist _* {	
-	disp "`v'"
-	disp "`d'"
-	//quietly: ///
-	quietly: reghdfe `v' LO_0* LO_1* if post == 1, ///
-	absorb(INSPDATE CAMIS) cluster(InspectorID ZIPCODE)
-	//disp _b[LO`d']
-	//disp _se[LO`d']
-}
-*/
+use inspect_processed.dta, clear
 
 local vars Food_Protection Vermin_Garbage Facility_Design ///
 Food_Temperature Facility_Maintenance Personal_Hygiene General_Food_Source ///
@@ -100,25 +83,31 @@ foreach v of varlist `vars'{
 	outreg2 using task_cnt.tex, `change' tex(frag) label ///
 	addtext(Time FE, YES) 
 	//#matrix list e(b)
-	local beta = _b[LO_Food_Temperature]
-	local se = _se[LO_Food_Temperature]	
+	//local beta = _b[LO_Food_Temperature]
+	//local se = _se[LO_Food_Temperature]
+	/*  Test whether more stringent inspectors are more stringent across 
+	different dimensions: 
 	quietly: reghdfe `v' LO_SCORE2 ///
 	if post == 1 & inspector_cnt > 50, ab(INSPDATE ZIPCODE chain cuisine service venue) ///
 	cluster(ZIPCODE InspectorID)
 	//#matrix list e(b)
 	outreg2 using mono.tex, `change' tex(frag) label ///
-	addtext(Time FE, YES) 
-	reghdfe n_`v' (`vars' = `inst')              ///
+	addtext(Time FE, YES)  */
+	qui: reghdfe n_`v' (`vars' = `inst')              ///
 	if post == 1 & inspect_type  == 1 & inspector_cnt > 50,                      ///
 	a(INSPDATE next_same_type_date ZIPCODE chain cuisine service venue) ///
 	cluster(InspectorID ZIPCODE)
-	outreg2 using tasks_IV.tex, `change' tex(frag) label ctitle("`lab'") nor2    
+	qui: estadd ysumm
+	outreg2 using tasks_IV.tex, `change' tex(frag) label ctitle("`lab'") ///
+	nor2 addstat("dependent mean", e(ymean)) 
 
 	qui: reghdfe n_`v'_cnt (`vars' = `inst_cnt')              ///
 	if post == 1 & inspect_type  == 1 & inspector_cnt > 50,                      ///
 	a(INSPDATE next_same_type_date ZIPCODE chain cuisine service venue) ///
 	cluster(InspectorID ZIPCODE)
-	outreg2 using tasks_IV_cnt.tex, `change' tex(frag) label ctitle("`lab'") nor2    
+	qui: estadd ysumm
+	outreg2 using tasks_IV_cnt.tex, `change' tex(frag) label ctitle("`lab'") ///
+	nor2 addstat("dependent mean", e(ymean)) 
 
 	/*
 	file write myfile "`beta'"

@@ -1,9 +1,7 @@
 set more off
 
 cd "~/Desktop/NYC Food Inspection/Data/DTA"
-use code.dta, clear
-cd "~/Desktop/NYC Food Inspection/Script/Stata"
-run pre_process.do
+use inspect_processed.dta, clear
 
 gen venue_copy = venue
 gen service_copy = service
@@ -32,15 +30,14 @@ label values venue venue_label
 */
 
 /******* Prepare Regression Outputs *******************************************/
-cd "~/Desktop/NYC Food Inspection/Data/RegOutput"
-
+cd "~/Dropbox/Research Ideas/Food Inspection Scores/New York/Tex/Tables/"
 reghdfe SCORE last_score i.last_grade last_LO  ///
 chain_restaurant  *_cuis ib22.venue *_serv                                   ///
 if post ==1 & BORO != 0 & inspector_cnt > 50 &                               /// 
 (inspect_type == 1 | inspect_type == 2) & service != 1,                      ///
 absorb(INSPDATE ZIPCODE inspect_type) cluster(InspectorID ZIPCODE) 
 outreg2 using random.tex, replace tex(frag) label                            ///
-addstat("F Statistics", e(F)) sideway nor2
+addstat("F Statistics", e(F)) sideway nor2 ctitle("Score")
 
 reghdfe LO_SCORE2 last_score i.last_grade last_LO                            ///
 chain_restaurant *_cuis ib22.venue *_serv                                    ///

@@ -51,12 +51,10 @@ for s in range(df_des_add.shape[0]/1000+1):
             header = False)
 
 
-df_des[df_des['ADDRESS'].notnull()]\
-[['CAMIS','ADDRESS','ZIPCODE','boro']]\
+df_des_add[['CAMIS','ADDRESS','ZIPCODE','boro','address']]\
 .to_csv(dta_path + 'NYC_rest.csv', index = False)
 
-df_des[df_des['ADDRESS'].notnull()]\
-[['CAMIS','ADDRESS','ZIPCODE','boro']]\
+df_des_add[['CAMIS','ADDRESS','ZIPCODE','boro','address']]\
 .to_pickle(pkl_path + 'NYC_rest.pkl')
 
 ### Create call data ######################################

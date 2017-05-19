@@ -89,5 +89,4 @@ reghdfe B B_bunch_Re LO_SCORE ///
 if post == 1 & SCORE <= 29 & SCORE >= 26 & inspect_type == 2, ///
 absorb(CAMIS INSPDATE ) cluster(InspectorID CAMIS )
 
-	
 

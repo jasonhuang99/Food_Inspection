@@ -1,7 +1,9 @@
 /*******
 This file generates and encodes variables that multiple scripts use
 ********************/
-
+cd "~/Desktop/NYC Food Inspection/Data/DTA"
+//use nyc_inspect_shift.dta, clear
+use code.dta, clear
 
 /******* Generate Needed New Variables ****************************************/
 gen post = INSPDATE > mdy(10,1,2010)
@@ -15,6 +17,8 @@ replace grade = "C" if SCORE > 27
 encode grade, gen(grade_enc)
 drop grade
 rename grade_enc grade
+
+gen grade_A = grade == 1
 
 encode INSPTYPE , gen(inspect_type)
 encode last_type, gen(last_type_enc)
@@ -37,14 +41,7 @@ gen age = INSPDATE - first
 encode ACTION, gen(ACTION_enc)
 drop ACTION 
 rename ACTION_enc ACTION
-
-gen next_grade = "A" if next_score < 14
-replace next_grade = "B" if next_score >= 14 & next_score <= 27
-replace next_grade = "C" if next_score > 27
-
-encode next_grade, gen(next_grade_enc)
-drop next_grade
-rename next_grade_enc next_grade
+gen temp_closed = ACTION == 6
 
 encode venue, gen(venue_enc)
 drop venue
@@ -95,27 +92,7 @@ gen cafeteria_serv = service == 5
 gen time_since_last = INSPDATE - last
 gen time2next = next - INSPDATE
 
-// Lag terms
-sort CAMIS INSPDATE, stable
-by CAMIS: gen last_LO = LO_SCORE[_n-1]
-by CAMIS: gen next_LO2 = LO_SCORE[_n+1]
-sort CAMIS INSPDATE, stable
-by CAMIS: gen last_grade = grade[_n-1]
-sort CAMIS INSPDATE, stable
-by CAMIS: gen last_mod_grade = mod_grade[_n-1]
-
-
-sort CAMIS inspect_type INSPDATE, stable
-by CAMIS inspect_type, sort: gen n_same_type_score = SCORE[_n + 1]
-sort CAMIS inspect_type INSPDATE, stable
-by CAMIS inspect_type, sort: gen next_same_type_date = INSPDATE[_n + 1]
-format next_same_type_date %d
-gen time2nextInit = next_same_type_date - INSPDATE
-
-local vars Facility_Maintenance Food_Protection Personal_Hygiene ///
-Food_Temperature Vermin_Garbage General_Food_Source Facility_Design ///
-Critical_Food_Source 
-
+//Leave one out calculation
 by InspectorID post inspect_type, sort: gen inspector_cnt = _N
 by InspectorID post inspect_type CAMIS, sort: gen inspect_camis_cnt = _N
 
@@ -126,10 +103,36 @@ gen LO_SCORE2 = ///
 (inspector_score - inspector_camis_score)/(inspector_cnt - inspect_camis_cnt)
 drop inspector_score*
 
+// Lag terms
+sort CAMIS INSPDATE, stable
+by CAMIS: gen last_LO = LO_SCORE[_n-1]
+by CAMIS: gen next_LO2 = LO_SCORE2[_n+1]
+sort CAMIS INSPDATE, stable
+by CAMIS: gen last_grade = grade[_n-1]
+sort CAMIS INSPDATE, stable
+by CAMIS: gen last_mod_grade = mod_grade[_n-1]
+
+sort CAMIS inspect_type INSPDATE, stable
+by CAMIS inspect_type: gen n_same_type_score = SCORE[_n + 1]
+by CAMIS inspect_type: gen n_same_type_A = grade_A[_n + 1]
+by CAMIS inspect_type: gen n_same_type_shutdown = temp_closed[_n + 1]
+
+foreach l of numlist 1/6 {
+	by CAMIS inspect_type: gen l`l'_same_type_score = SCORE[_n -`l']
+	by CAMIS inspect_type: gen l`l'_same_type_lo_score = LO_SCORE2[_n - `l']
+	by CAMIS inspect_type: gen l`l'_same_type_inspect_cnt = inspector_cnt[_n -`l']
+}
+
+sort CAMIS inspect_type INSPDATE, stable
+by CAMIS inspect_type, sort: gen next_same_type_date = INSPDATE[_n + 1]
+format next_same_type_date %d
+gen time2nextInit = next_same_type_date - INSPDATE
+
 local vars Facility_Maintenance Food_Protection Personal_Hygiene ///
 Food_Temperature Vermin_Garbage General_Food_Source Facility_Design ///
-Critical_Food_Source
+Critical_Food_Source 
 
+// Task-specific leave out stringency calculation and next type calculations
 foreach v of varlist `vars' {
 	egen i_`v' = sum(`v'), by(InspectorID post inspect_type)
 	egen i_`v'_cnt = sum(`v'_cnt), by(InspectorID post inspect_type)
@@ -142,21 +145,17 @@ foreach v of varlist `vars' {
 	gen LO_`v'_cnt = ///
 	(i_`v'_cnt - i_c_`v'_cnt)/(inspector_cnt - inspect_camis_cnt)
 }
+
 gen post_date = min(max(INSPDATE, CASE_DECISION_DATE),mdy(12,31,year(INSPDATE)))
 replace post_date = min(next,post_date)
 replace post_date = INSPDATE if inspect_type == 1
 sort CAMIS INSPDATE, stable
 by CAMIS: gen last_post_date = post_date[_n - 1]
 
-
 gen case2next = max(next - post_date,0)
 replace case2next = next - INSPDATE if inspect_type == 1
 replace case2next = min(case2next, ///
 mdy(12,31,year(post_date)) - post_date)
-
-/*
-gen time2next_cap = min(next, ///
-mdy(12,31,year(post_date)) - post_date) */
 
 //interim: time between case decision and inspection, 0 for initial
 gen interim = post_date - INSPDATE
@@ -222,6 +221,7 @@ foreach v of varlist `vars' {
 	sort CAMIS, stable
 	by CAMIS: gen last_f_`v' = `v'[_n-1]
 }
+
 // Inspector Specific Metrics
 egen Inspector_avg_score = mean(SCORE), by(InspectorID post) 
 by InspectorID post inspect_type, sort: gen InspectorID_uniq = _n == 1
@@ -230,13 +230,16 @@ by InspectorID post inspect_type, sort: gen InspectorID_uniq = _n == 1
 label variable SCORE                 "Score"
 label variable MOD_TOTALSCORE        "Modified Score"
 label variable next_score            "next score"
+label variable n_same_type_shutdown  "Shutdown"
+label variable temp_closed           "Shutdown by DOHMH"
+label variable n_same_type_A         "Got A Next Initial Inspection"
 label variable inspect_type          "re-inspection"
 label variable age                   "age (in days)"
 label variable last_LO               "last inspector propensity"
 label variable inspect_type          "re-inspection"
 label variable chain_restaurant      "chain"
 label variable last_score            "last score"
-label variable LO_SCORE              "Inspector Propensity"
+label variable LO_SCORE2              "Inspector Propensity"
 
 label variable Vermin_Garbage        "Vermin/Garbage"
 label variable Food_Protection       "Food Protection"
@@ -253,12 +256,59 @@ label variable pizza_italian_cuis    "Pizza/Italian"
 label variable coffee_tea_cuis       "Coffee/Tea"
 label variable latin_cuis            "Latin" 
 label variable spanish_cuis          "Spanish"
-label variable carribean_cuis        "Carribean"
+label variable carribean_cuis        "Caribbean"
 label variable sandwich_cuis         "Sandwich"
 label variable sea_food_cuis         "Sea Food"
 
+label variable buffet_serv           "Buffet Service"
+label variable cater_serv            "Cater Service"
+label variable counter_serv          "Counter Service"
+label variable take_out_serv         "Take-out Service"
+label variable wait_serv             "Wait Service"
+label variable cafeteria_serv        "Cafeteria Service"
+
+label variable Food_Protection "Food Protection"
+label variable LO_Food_Protection "Food Protection"
+label variable Food_Protection_cnt "Food Protection"
+label variable LO_Food_Protection_cnt "Food Protection"
+
+label variable Facility_Design "Facility Design"
+label variable LO_Facility_Design "Facility Design"
+label variable Facility_Design_cnt "Facility Design"
+label variable LO_Facility_Design_cnt "Facility Design"
+
+label variable Facility_Maintenance "Facility Maintenance"
+label variable LO_Facility_Maintenance "Facility Maintenance"
+label variable Facility_Maintenance_cnt "Facility Maintenance"
+label variable LO_Facility_Maintenance_cnt "Facility Maintenance"
+
+label variable Vermin_Garbage "Vermin/Garbage"
+label variable LO_Vermin_Garbage "Vermin/Garbage"
+label variable Vermin_Garbage_cnt "Vermin/Garbage"
+label variable LO_Vermin_Garbage_cnt "Vermin/Garbage"
+
+label variable Food_Temperature "Food Temperature"
+label variable LO_Food_Temperature "Food Temperature"
+label variable Food_Temperature_cnt "Food Temperature"
+label variable LO_Food_Temperature_cnt "Food Temperature"
+
+label variable Personal_Hygiene "Personal Hygiene"
+label variable LO_Personal_Hygiene "Personal Hygiene"
+label variable Personal_Hygiene_cnt "Personal Hygiene"
+label variable LO_Personal_Hygiene_cnt "Personal Hygiene"
+
+label variable General_Food_Source "Gen. Food Source"
+label variable LO_General_Food_Source "Gen. Food Source"
+label variable General_Food_Source_cnt "Gen. Food Source"
+label variable LO_General_Food_Source_cnt "Gen. Food Source"
+
+label variable Critical_Food_Source "Crit. Food Source"
+label variable LO_Critical_Food_Source "Crit. Food Source"
+label variable Critical_Food_Source_cnt "Crit. Food Source"
+label variable LO_Critical_Food_Source_cnt "Crit. Food Source"
 foreach v of varlist `vars' {
 	local lab: variable label `v'
 	label variable last_LO_`v' "last `lab'"
 }
 
+save inspect_processed.dta, replace

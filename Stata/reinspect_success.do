@@ -1,44 +1,9 @@
 set more off
 
 cd "~/Desktop/NYC Food Inspection/Data/DTA"
-//use nyc_inspect_shift.dta, clear
-use code.dta, clear
-cd "~/Desktop/NYC Food Inspection/Script/Stata"
-run pre_process2.do
+use inspect_processed.dta, clear
 
-cd "~/Desktop/NYC Food Inspection/Data/RegOutput"
-/********** 1st Stage **************/
-label variable LO_SCORE "Z"
-label variable LO_SCORE2 "Z"
-qui: reghdfe SCORE LO_SCORE2 if post == 1, ///
-absorb(INSPDATE) cluster(InspectorID ZIPCODE)
-
-outreg2 using FirstStage.tex, replace tex(frag) label ///
-addtext(Restaurant Controls, NO, Next Time FE, NO) addstat("F Statistics", e(F))
-
-qui: reghdfe SCORE LO_SCORE2 if post == 1, ///
-absorb(INSPDATE ZIPCODE chain cuisine service venue) cluster(InspectorID ZIPCODE)
-
-outreg2 using FirstStage.tex, append tex(frag) label ///
-addtext(Restaurant Controls, YES, Next Time FE, NO) addstat("F Statistics", e(F))
-
-
-qui: reghdfe SCORE LO_SCORE if post == 1, ///
-absorb(INSPDATE CAMIS) cluster(InspectorID ZIPCODE)
-
-outreg2 using FirstStage.tex, append tex(frag) label ///
-addtext(Restaurant FE, YES, Next Time FE, NO) addstat("F Statistics", e(F))
-
-reghdfe MOD_TOTALSCORE LO_SCORE if post == 1 & grade > 1, ///
-absorb(INSPDATE ZIPCODE chain cuisine service venue) ///
-cluster(InspectorID ZIPCODE)
-
-outreg2 using FirstStage.tex, append tex(frag) label ///
-addtext(Restaurant FE, YES, Next Time FE, NO) addstat("F Statistics", e(F))
-
-reghdfe open SCORE  ///
-if post == 1 & inspect_type  == 1, ///
-absorb(INSPDATE CAMIS) cluster(InspectorID ZIPCODE) 
+cd "~/Dropbox/Research Ideas/Food Inspection Scores/New York/Tex/Tables"
 
 /************ next inspect scores **********************/
 
@@ -73,13 +38,97 @@ foreach v of varlist `vars' {
 	outreg2 using tasks_IV.tex, `change' tex(frag) label ctitle("`lab'") nor2    
 }
 */
-foreach v of varlist SCORE MOD_TOTALSCORE {
+
+qui: reghdfe n_same_type_score SCORE                                         ///
+if post == 1 & inspect_type  == 1 & inspector_cnt > 50,                      ///
+a(INSPDATE CAMIS next_same_type_date) cluster(InspectorID ZIPCODE)
+qui: estadd ysumm 
+outreg2 using shutdown_next.tex, replace tex(frag) label                     ///
+ctitle("Score (OLS)") addstat("dependent mean", e(ymean)) ///
+nor2 addtext(Inspection Date FE, YES, Restaurant FE, YES) 
+
+qui: reghdfe n_same_type_score (SCORE = LO_SCORE2)                           ///
+if post == 1 & inspect_type  == 1 & inspector_cnt > 50,                      ///
+a(INSPDATE CAMIS next_same_type_date) cluster(InspectorID ZIPCODE)
+qui: estadd ysumm 
+outreg2 using shutdown_next.tex, append tex(frag) label                     ///
+ctitle("Score (IV)") nor2 addstat("dependent mean", e(ymean)) ///
+addtext(Inspection Date FE, YES, Restaurant FE, YES) 
+
+qui: reghdfe n_same_type_shutdown SCORE  ///
+if post == 1 & inspect_type  == 1 & inspector_cnt > 50 & SCORE <= 28,  ///
+a(INSPDATE CAMIS next_same_type_date) ///
+cluster(InspectorID ZIPCODE)    
+qui: estadd ysumm              
+outreg2 using shutdown_next.tex, append tex(frag) label ///
+ctitle("Closure (OLS)") nor2 ///
+addtext(Inspection Date FE, YES, Restaurant FE, YES) ///
+addstat("dependent mean", e(ymean)) 
+
+reghdfe n_same_type_shutdown (SCORE = LO_SCORE2) ///
+if post == 1 & inspect_type  == 1 & inspector_cnt > 50 & SCORE <= 28, ///
+a(INSPDATE CAMIS next_same_type_date) ///
+cluster(InspectorID ZIPCODE) 
+qui: estadd ysumm                 
+outreg2 using shutdown_next.tex, append tex(frag) label ///
+ctitle("Closure (IV)") nor2 ///
+addtext(Inspection Date FE, YES, Restaurant FE, YES) cttop("Closure") ///
+addstat("dependent mean", e(ymean))
+
+reghdfe n_same_type_A SCORE  ///
+if post == 1 & inspect_type  == 1 & inspector_cnt > 50,  ///
+a(INSPDATE CAMIS next_same_type_date ) ///
+cluster(InspectorID ZIPCODE)  
+qui: estadd ysumm                
+outreg2 using shutdown_next.tex, append tex(frag) label ///
+ctitle("Grade A (OLS)") nor2 ///
+addtext(Inspection Date FE, YES, Restaurant FE, YES) ///
+addstat("dependent mean", e(ymean))  
+       
+reghdfe n_same_type_A (SCORE = LO_SCORE2) ///
+if post == 1 & inspect_type  == 1 & inspector_cnt > 50,  ///
+a(INSPDATE CAMIS next_same_type_date ) ///
+cluster(InspectorID ZIPCODE) 
+qui: estadd ysumm                 
+outreg2 using shutdown_next.tex, append tex(frag) ///
+ctitle("Grade A (IV)") label nor2 ///
+addtext(Inspection Date FE, YES, Restaurant FE, YES) ///
+addstat("dependent mean", e(ymean)) 
+
+local inspect_cnt_limit 50
+
+reghdfe n_same_type_shutdown ///
+(SCORE l*_same_type_score = LO_SCORE2 l*_same_type_lo_score) ///
+if post == 1 & inspect_type  == 1 & inspector_cnt > `inspect_cnt_limit' & ///
+l1_same_type_inspect_cnt > `inspect_cnt_limit' & ///
+l2_same_type_inspect_cnt > `inspect_cnt_limit' & ///
+l3_same_type_inspect_cnt > `inspect_cnt_limit' & ///
+l4_same_type_inspect_cnt > `inspect_cnt_limit' & ///
+l5_same_type_inspect_cnt > `inspect_cnt_limit' & ///
+l6_same_type_inspect_cnt > `inspect_cnt_limit',  ///
+a(INSPDATE CAMIS) ///
+cluster(InspectorID ZIPCODE)                  
+
+foreach limit of numlist 50 250 350 550 650 {
+	if `limit' == 50 {
+		local change "replace"
+	}
+	else {
+		local change "append"
+	}
+	reghdfe n_same_type_score (SCORE = LO_SCORE2)                            ///
+	if post == 1 & inspect_type  == 1 & inspector_cnt > `limit',             ///
+	a(INSPDATE next_same_type_date ZIPCODE chain cuisine service venue)      ///
+	cluster(InspectorID ZIPCODE)
+}
+//MOD_TOTALSCORE
+foreach v of varlist SCORE  {
 
 	qui: reghdfe n_same_type_score `v'                                         ///
 	if post == 1 & inspect_type  == 1 & inspector_cnt > 50,                      ///
 	a(INSPDATE next_same_type_date) cluster(InspectorID ZIPCODE)
 	outreg2 using `v'_next.tex, replace tex(frag) label ctitle("OLS") nor2        ///
-	addtext(Restaurant Controls, No, Restaurant FE, No)
+	addtext(Restaurant Controls, No, Restaurant FE, No) 
 
 	qui: reghdfe n_same_type_score `v'                                        ///
 	if post == 1 & inspect_type  == 1 & inspector_cnt > 50,                      ///
@@ -156,7 +205,7 @@ foreach v of varlist SCORE MOD_TOTALSCORE {
 	if post == 1 & inspect_type  == 1 & SCORE > 13 & inspector_cnt > 50 & next_type == 2,                          ///
 	a(INSPDATE next_same_type_date) cluster(InspectorID ZIPCODE)
 	outreg2 using `v'_nextH.tex, replace tex(frag) label ctitle("OLS") nor2        ///
-	addtext(Restaurant Controls, No, Restaurant FE, No)
+	addtext(Restaurant Controls, No, Restaurant FE, No) 
 
 	qui: reghdfe n_same_type_score `v' next_score                                        ///
 	if post == 1 & inspect_type  == 1 & SCORE > 13 & inspector_cnt > 50 & next_type == 2,                          ///

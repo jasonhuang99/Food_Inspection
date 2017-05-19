@@ -118,7 +118,7 @@ by InspectorID post inspect_type, sort: gen inspector_cnt = _N
 by InspectorID post inspect_type CAMIS, sort: gen inspect_camis_cnt = _N
 
 egen inspector_score = sum(SCORE), by(InspectorID post inspect_type)
-egen inspector_camis_score= sum(SCORE), ///
+egen inspector_camis_score = sum(SCORE), ///
 by(InspectorID post inspect_type CAMIS)
 gen LO_SCORE2 = ///
 (inspector_score - inspector_camis_score)/(inspector_cnt - inspect_camis_cnt)
@@ -136,9 +136,6 @@ replace carry_over = INSPDATE - mdy(1,1,year(INSPDATE)) ///
 if year(last_post_date) < year(INSPDATE)
 gen weight = carry_over + time2next_cap
 egen weight_check = sum(weight), by(CAMIS year)
-
-
-
 sort CAMIS year INSPDATE
 sort CAMIS year inspect_type, stable
 by CAMIS year inspect_type: gen seq = _n
