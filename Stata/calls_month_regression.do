@@ -11,15 +11,15 @@ sort CAMIS InspectorID
 
 //Consider only whether a complaint call occured or not. 
 gen called_vis = min(Counted_Calls_vis,1)
+gen called_vis_non_LG = min(Counted_Calls_vis_non_LG,1)
+gen called_vis_LG = called_vis - called_vis_non_LG
 gen called = min(Counted_Calls,1)
+
 
 joinby CAMIS InspectorID using inspector_score
 
 sort CAMIS
 merge CAMIS using geocoded_camis.dta
-
-/* egen called_ever = max(called), by(CAMIS)
-keep if _merge == 3 | called_ever */
 
 encode INSPTYPE, gen(inspect_type)
 gen month_year = mdy(month, 1, year)
@@ -50,20 +50,29 @@ reghdfe Counted_Calls visible_score if num_inspect == 0, ///
 a(CAMIS month_year) cluster(ZIPCODE InspectorID)  */
 
 /*********** Make Plots ****************/
-reghdfe called_vis i.visible_score ///
-if visible_score <= 40 & visible_score >= 0 [w = weight_vis], ///
+qui: reghdfe called_vis_non_LG i.visible_score ///
+if visible_score <= 40 & visible_score >= 0, ///
 a(CAMIS month_year) cluster(CAMIS InspectorID)
 
-predict calls_visible, xb
+capture drop calls_visible_non_LG
+predict calls_visible_non_LG, xb
 
-reghdfe called i.SCORE if SCORE <= 40, ///
+reghdfe called_vis_LG ib2.visible_score ///
+if visible_score <= 40 & visible_score >= 0, ///
 a(CAMIS month_year) cluster(CAMIS InspectorID)
 
+capture drop calls_visible_LG
+predict calls_visible_LG, xb
+
+qui: reghdfe called ib0.SCORE if SCORE <= 40, ///
+a(CAMIS month_year) cluster(CAMIS InspectorID)
+
+capture drop calls_scores
 predict calls_scores, xb
 
 twoway (hist Modified_Score if Modified_Score <= 40, ///
 discrete width(1) gap(50) bcolor(gs11) graphregion(color(white)) yaxis(1) xtitle("")) ///
-(scatter calls_visible visible_score ///
+(scatter calls_visible_non_LG visible_score ///
 if vis_score_uniq == 1 & visible_score <= 40 & visible_score >= 0, ///
 xline(13.5) xline(27.5) yaxis(2) mcolor(navy))  ///
 (scatter calls_scores SCORE ///
@@ -76,20 +85,49 @@ yaxis(2) lcolor(green)) ///
 (fpfit calls_scores SCORE ///
 if score_uniq == 1 & SCORE >= 14 & SCORE <= 27, ///
 yaxis(2) lcolor(green)) ///
-(fpfit calls_visible visible_score ///
+(fpfit calls_visible_non_LG visible_score ///
 if vis_score_uniq == 1 & visible_score <= 13, yaxis(2) lcolor(navy)) ///
-(fpfit calls_visible visible_score ///
+(fpfit calls_visible_non_LG visible_score ///
 if vis_score_uniq == 1 & visible_score >= 28 & visible_score <= 40, ///
 yaxis(2) lcolor(navy)) ///
-(fpfit calls_visible visible_score ///
+(fpfit calls_visible_non_LG visible_score ///
 if vis_score_uniq == 1 & visible_score >= 14 & visible_score <= 27, ///
 yaxis(2) lcolor(navy)),  ///
 ylabel(0(0.01)0.02,axis(2)) ///
-legend(order(1 "Density" 2 "Visible Scores" 3 "Underlying Scores") cols(3)) ///
+legend(order(1 "Density" 2 "Visible Scores" 3 "Underlying Scores") cols(2)) ///
 title("Monthly Probability of Complaint Calls and Visible Scores")
 
+
+twoway (hist Modified_Score if Modified_Score <= 40, ///
+discrete width(1) gap(50) bcolor(gs11) graphregion(color(white)) yaxis(1) xtitle("")) ///
+(scatter calls_visible_LG visible_score ///
+if vis_score_uniq == 1 & visible_score <= 40 & visible_score >= 0, ///
+xline(13.5) xline(27.5) yaxis(2) mcolor(navy))  ///
+(scatter calls_scores SCORE ///
+if score_uniq == 1 & SCORE <= 40, yaxis(2) mcolor(green)) ///
+(fpfit calls_score SCORE ///
+if score_uniq == 1 & SCORE <= 13, yaxis(2) lcolor(green)) ///
+(fpfit calls_scores SCORE ///
+if score_uniq == 1 & SCORE >= 28 & SCORE <= 40, ///
+yaxis(2) lcolor(green)) ///
+(fpfit calls_scores SCORE ///
+if score_uniq == 1 & SCORE >= 14 & SCORE <= 27, ///
+yaxis(2) lcolor(green)) ///
+(fpfit calls_visible_LG visible_score ///
+if vis_score_uniq == 1 & visible_score <= 13, yaxis(2) lcolor(navy)) ///
+(fpfit calls_visible_LG visible_score ///
+if vis_score_uniq == 1 & visible_score >= 28 & visible_score <= 40, ///
+yaxis(2) lcolor(navy)) ///
+(fpfit calls_visible_LG visible_score ///
+if vis_score_uniq == 1 & visible_score >= 14 & visible_score <= 27, ///
+yaxis(2) lcolor(navy)),  ///
+ylabel(0(0.01)0.02,axis(2)) ///
+legend(order(1 "Density" 2 "Visible Scores" 3 "Underlying Scores") cols(2)) ///
+title("Monthly Probability of Letter Grade Complaint Calls")
+
+
 cd "~/Dropbox/Research Ideas/Food Inspection Scores/New York/Tex/Figures/Calls"
-graph export score_calls_hist_vis.png, replace
+graph export score_calls_hist_vis_LG.png, replace
 
 /*
 gen grade_C = visible_score > 27

@@ -101,6 +101,13 @@ egen inspector_camis_score= sum(SCORE), ///
 by(InspectorID post inspect_type CAMIS)
 gen LO_SCORE2 = ///
 (inspector_score - inspector_camis_score)/(inspector_cnt - inspect_camis_cnt)
+
+egen inspector_b13 = sum(SCORE <= 13), by(InspectorID post inspect_type)
+egen inspector_camis_b13 = sum(SCORE <= 13), ///
+by(InspectorID post inspect_type CAMIS)
+gen LO_b13 = ///
+(inspector_b13 - inspector_camis_b13)/(inspector_cnt - inspect_camis_cnt)
+
 drop inspector_score*
 
 // Lag terms

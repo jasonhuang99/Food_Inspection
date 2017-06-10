@@ -15,6 +15,30 @@ local inst LO_Facility_Maintenance LO_Food_Protection LO_Personal_Hygiene ///
 LO_Food_Temperature LO_Vermin_Garbage LO_General_Food_Source LO_Facility_Design ///
 LO_Critical_Food_Source 
 
+/*
+foreach v of varlist `vars' {
+	local lab: variable label `v'
+	if "`v'" == "Facility_Maintenance" {
+		disp "`v'"
+		local change "replace"
+	} 
+	else {
+		local change "append"
+	}
+	/*
+	reghdfe n_`v' `vars'             ///
+	if post == 1 & inspect_type  == 1 & inspector_cnt > 50,                      ///
+	a(INSPDATE next_same_type_date) cluster(InspectorID ZIPCODE)
+	outreg2 using tasks_OLS.tex, `change' tex(frag) label nor2 ctitle("`lab'") */     ///
+
+	reghdfe n_`v' (`vars' = `inst')              ///
+	if post == 1 & inspect_type  == 1 & inspector_cnt > 50,                      ///
+	a(INSPDATE next_same_type_date ZIPCODE chain cuisine service venue) ///
+	cluster(InspectorID ZIPCODE)
+	outreg2 using tasks_IV.tex, `change' tex(frag) label ctitle("`lab'") nor2    
+}
+*/
+
 qui: reghdfe n_same_type_score SCORE                                         ///
 if post == 1 & inspect_type  == 1 & inspector_cnt > 50,                      ///
 a(INSPDATE CAMIS next_same_type_date) cluster(InspectorID ZIPCODE)
@@ -32,8 +56,7 @@ ctitle("Score (IV)") nor2 addstat("dependent mean", e(ymean)) ///
 addtext(Inspection Date FE, YES, Restaurant FE, YES) 
 
 qui: reghdfe n_same_type_shutdown SCORE  ///
-if post == 1 & inspect_type  == 1 & inspector_cnt > 50 & ///
-(SCORE <= 28 | l2_same_type_score <= 28 | l3_same_type_score <= 28),  ///
+if post == 1 & inspect_type  == 1 & inspector_cnt > 50 & SCORE <= 28,  ///
 a(INSPDATE CAMIS next_same_type_date) ///
 cluster(InspectorID ZIPCODE)    
 qui: estadd ysumm              
@@ -43,8 +66,7 @@ addtext(Inspection Date FE, YES, Restaurant FE, YES) ///
 addstat("dependent mean", e(ymean)) 
 
 reghdfe n_same_type_shutdown (SCORE = LO_SCORE2) ///
-if post == 1 & inspect_type  == 1 & inspector_cnt > 50 & ///
-(SCORE <= 28 | l1_same_type_score <= 28 | l2_same_type_score <= 28), ///
+if post == 1 & inspect_type  == 1 & inspector_cnt > 50 & SCORE <= 28, ///
 a(INSPDATE CAMIS next_same_type_date) ///
 cluster(InspectorID ZIPCODE) 
 qui: estadd ysumm                 

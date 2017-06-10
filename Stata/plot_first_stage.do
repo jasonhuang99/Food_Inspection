@@ -60,7 +60,7 @@ cd "~/Desktop/NYC Food Inspection/Figures/First_Stage"
 
 set scheme s2color
 lpoly SCORE LO_SCORE2 if inspector_cnt >= 50 & ///
-post == 1 & LO_SCORE <= 40 , noscatter ci bw(2) level(99) ///
+post == 1 & LO_SCORE2 <= 40 , noscatter ci bw(2) level(99) ///
 xlabel(0(10)40) xscale(range(0 10) noextend)                                 ///
 if inrange(LO_SCORE, 0, 40)                                                  ///
 title("First Stage Graph") xtitle("Inspector Specific Score")                 ///
