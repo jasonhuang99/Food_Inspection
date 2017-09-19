@@ -1,0 +1,12 @@
+		(1)	(2)	(3)	(4)	(5)	(6)
+VARIABLES	LABELS	Score (OLS)	Score (IV)	Closure (OLS)	Closure (IV)	Grade A (OLS)	Grade A (IV)
+							
+SCORE	Score	-0.139***	-0.242***	-0.000763***	-0.00101***	-8.49e-05	0.00222***
+		(0.00492)	(0.0162)	(8.26e-05)	(0.000185)	(0.000127)	(0.000556)
+							
+Observations		149,831	149,831	138,674	138,674	149,831	149,831
+Inspection Date FE		YES	YES	YES	YES	YES	YES
+Restaurant FE		YES	YES	YES	YES	YES	YES
+dependent mean		21.08	21.08	0.0162	0.0162	0.372	0.372
+Robust standard errors in parentheses							
+*** p<0.01, ** p<0.05, * p<0.1							

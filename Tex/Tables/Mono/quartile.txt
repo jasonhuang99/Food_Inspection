@@ -1,0 +1,10 @@
+Baseline-Sample					
+		(1)	(2)	(3)	(4)
+VARIABLES	LABELS	1st Quartile	2nd Quartile	3nd Quartile	4th Quartile
+					
+LO_SCORE2	Estimate	0.407***	0.681***	0.852***	1.231***
+		(0.0270)	(0.0240)	(0.0213)	(0.0256)
+					
+Observations		80,172	81,817	81,901	86,433
+Robust standard errors in parentheses					
+*** p<0.01, ** p<0.05, * p<0.1					

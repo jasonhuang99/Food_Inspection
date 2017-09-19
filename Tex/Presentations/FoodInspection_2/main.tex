@@ -1,0 +1,1007 @@
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice. 
+
+\documentclass[handout]{beamer}
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+ \usepackage[flushleft]{threeparttable}
+    \usepackage{tabularx}
+        \newcolumntype{Z}{>{\centering\arraybackslash}X}
+        \newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\usepackage{bbm}
+\usepackage{dcolumn}
+\usepackage{subfig}
+        \newcolumntype{d}[1]{D{.}{.}{#1}}
+
+    \usepackage{rotating}               
+% There are many different themes available for Beamer. A comprehensive
+% list with examples is given here:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+% You can uncomment the themes below if you would like to use a different
+% one:
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{boxes}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{default}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+\usepackage{multicol}
+\usetheme{Singapore}
+\useoutertheme{infolines}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+\title[Food Inspection]{Do Monitoring and Transparency Make Food Safer?}
+
+% A subtitle is optional and this may be deleted
+\subtitle{}
+
+\author{Jason Huang}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date{\today}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+
+
+% Let's get started
+\begin{document}
+\newcommand{\cfbox}[2]{%
+    \colorlet{currentcolor}{.}%
+    {\color{#1}%
+    \fbox{\color{currentcolor}#2}}%
+}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+
+% Section and subsections will appear in the presentation overview
+% and table of contents.
+
+\begin{frame}{Motivation}
+\begin{itemize}
+    \item Sanitation at retail food establishments is a great public health concern but is also difficult for average consumers to enforce or observe
+    \pause
+    \item Municipal health departments conduct regular food inspections to ensure restaurants uphold hygiene standards
+    \begin{itemize}
+    \item Dearth of empirical studies that measure the efficacy of inspections on restaurant compliance
+    \end{itemize}
+    \end{itemize}
+    
+    \begin{itemize}
+    \begin{minipage}{0.7\linewidth}
+    \item Major cities, such as New York City, have started to make food inspection results more transparent by having restaurants post grades
+    \end{minipage} 
+    \begin{minipage}{0.25\linewidth}
+    \begin{figure}
+    \includegraphics[scale = 0.1]{grades.jpg}
+    \end{figure}
+    \end{minipage}
+    \begin{itemize}
+    \item Inspection results have become more prominent as they become integrated with Yelp
+    \end{itemize}
+    \end{itemize}
+   
+\end{frame}
+
+\begin{frame}{Research Questions}
+\pause
+\begin{itemize}
+\item Do inspections incentivize restaurants to improve their sanitation practices?
+\begin{itemize}
+\item Do restaurants shift attention and effort away from areas that they did well toward areas that got flagged?
+\item How do the magnitudes of the results vary across different types of establishments (heterogenous effects)
+\end{itemize}
+\pause
+\item How do restaurants, inspectors, and consumers respond to these letter grades?
+\begin{itemize}
+\item Does simplifying multi-dimensional and continuous object into discrete letters cause distortions?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Main Findings}
+\begin{itemize}
+\item Violation Citations
+\begin{itemize}
+\item Marginal increase in the number of citations leads to improved conditions in subsequent inspections
+\begin{itemize}
+\item Instead of focusing only on areas that they got cited, restaurants seem to improve in other areas as welll
+\end{itemize}
+\item More citations also reduces the probability that an establishment receives a complaint call
+\end{itemize}
+\item Letter Grades
+\begin{itemize}
+\item Probability that a restaurant receives a complaint increases sharply when it experiences a letter downgrade
+\begin{itemize}
+\item Finding suggests a disconnect between consumer perception and the underlying sanitation quality
+\end{itemize}
+\item Inspection scores bunch around the threshold between letter grades
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Road Map}
+\tableofcontents
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+\begin{frame}{Road Map}
+
+\begin{enumerate}
+\item Literature Review
+\item Background on NYC Food Inspection Program
+\item Data 
+\item Bunching Around the Thresholds
+\item Empirical Analysis
+\begin{itemize}
+\item Examining the assignments of inspectors
+\item Impact of Inspection Results on Subsequent Cleanliness
+\item Do harsh inspections hurt restaurant survival?
+\end{itemize}
+\item Steps Going Forward
+\item Discussion and Conclusion
+\end{enumerate}
+\end{frame}
+
+\section{Literature}
+\begin{frame}{1. Literature Review}
+Audit and Compliance
+\begin{itemize}
+\item Restaurants: Jin and Lee (2014, 2016)
+\item Environmental Regulation: Duflo et al (2014) 
+\item Workplace Safety: Levine, Toffel, and Johnson (2012)
+\item Tax: Feinstine (1991), Kleven et al (2011), Gemmell and Ratto (2012)
+\end{itemize}
+\pause
+Specific to NYC Food Inspection System
+\begin{itemize}
+\item Ho (2012), Meltzer et al (2015), Wong et al (2015)
+\end{itemize}
+\end{frame}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Background}
+\begin{frame}{2. Background on NYC Food Inspection Grading System}
+\begin{itemize}
+    \pause
+    \item Inspection occurs at least once a year
+    \begin{itemize}
+    \item During inspection, inspector cites violations, assign scores based on severity, and sum up scores
+    \end{itemize}
+    \pause
+    \item Total score is converted to letter grades based on the following cutoffs:
+    \begin{itemize}
+    \item $\leq$ 13: A
+    \item $\geq$ 14 and $\leq 27$: B 
+    \item $>$ 28: C
+    \end{itemize}
+    \pause
+    \item Dual Inspection: anything lower than $A$ during initial inspection results in a second inspection within a month
+    \begin{itemize}
+        \item In the meantime, post previous grade
+    \end{itemize}
+    \pause
+    \item After each inspection, restaurants can pursue adjudication to argue for better grades (in the meantime, post "Grade Pending")
+    \begin{itemize}
+    \item Resolved within 6 weeks of initial inspection
+    \end{itemize}
+    \item The health department temporally closes a restaurant if it finds critical violations 
+\end{itemize}
+\end{frame}
+
+\section{Data}
+\subsection{Food Inspection Data}
+\begin{frame}{Food Inspection Data}
+\begin{itemize}
+\item Universe of all food inspections conducted in NYC (2007 - 2016) 
+\pause
+\item Inspection date and inspector ID
+\pause
+\item Individual violation codes, total score, corresponding adjudication date, and modified score  
+\pause
+\item Restaurant level info: name, address, cuisine, service type, and venue type
+\end{itemize}
+\end{frame}
+
+\subsection{311 Call Data}
+\begin{frame}{311 Call Data}
+\begin{itemize}
+\item 311 is a phone line for non-emergency municipal services - also carries complaint calls to Department of Health and Mental Hygiene concerning restaurants
+\begin{itemize}
+\item Examples of complaints: 'Rodents/Insects/Garbage', 'Bare Hands in Contact w/ Food', 'Food Contains Foreign Object', 'Food Spoiled', 
+\end{itemize}
+\item From 2010 to present
+\item Each complaint has an incident address and date
+\item Use fuzzy string matching on street address to the inspection data
+\end{itemize}
+\end{frame}
+
+\begin{frame}{NYC Food Inspection Pipeline}
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.3]{../../Figures/Scores.png}
+    \footnotetext{The numbers in the parenthesis are the number of inspections in those steps}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+\begin{frame}{Restaurants are Fully Aware of How Inspections are Scored}
+\begin{figure}
+    \centering
+    \includegraphics[trim={0 0 0 3cm},clip,scale = 0.28]{self_assessment.png}
+\end{figure}
+\end{frame}
+\begin{frame}{Do More Experienced Restaurants Bunch More?}
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.4]{new_experienced.png}
+\end{figure}
+Little difference
+\end{frame}
+
+\begin{frame}{Do Restaurants Bunch More as They Become More Experienced?}
+\begin{itemize}
+\item Concern with previous analysis: survivorship bias.
+\item Perform local linear weighted regression of probability of getting an A, given that the score is within 2 points of threshold (12 to 15)\footnote{\tiny{Controlling for restaurant FEs and year FEs.}}
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.2]{A_bunch_age.png}
+\end{figure}
+\item No clear evidence of "learning" through length of time in business
+\end{itemize} 
+\end{frame}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Impact of Inspections on Restaurant Behaviors}
+\begin{frame}{Impact of Inspection Results on Subsequent Inspection Scores}
+\pause
+    \begin{itemize}
+        \item Do inspection results affect sanitation?
+        \begin{itemize}
+        \pause
+        \item Does getting a "bad" score make a restaurant work harder?
+        \item Does getting a "good" score cause a restaurant to slack off?
+        \end{itemize}
+        \pause
+        \item Do the inspection results cause restaurants to reallocate efforts across multiple tasks?
+    \end{itemize}
+    \pause
+    Identification strategy: exploit the randomness of inspector assignment and use inspector stringencies as an instrument
+\end{frame}
+
+\begin{frame}{Outcomes of Interests from Subsequent Inspections}
+\begin{itemize}
+\item Overall inspection scores
+\item Whether a restaurants receives an A and does not need an re-inspection
+\item Whether a restaurant commits critical violations that results in temporarily closure
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+\begin{frame}{Why should we care about the effects of Scores?}
+\begin{itemize}
+    \item Indirect monetary reason: scores contribute to letter grades that then can affect business
+    \pause
+    \item Direct monetary reason: each condition level of each violation is associated with a fine (\$200 - \$1000 after 2014, judges discretion before)
+    \pause
+    \item Behavior learning reason: restaurants learn about what inspectors are looking for and adjust
+\end{itemize}
+\end{frame}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Empirical Strategy}
+    \begin{align*}
+        Y_{i,t^{next}} = \beta Score_{i,t} + \delta_i + \tau_{t} + \tau_{t^{next}} + \varepsilon_{it}
+    \end{align*}
+    \begin{itemize}
+    \item $Y_{i,t^{next}}$: outcome from next inspection: overall score, temporary closure, getting an A
+    \item $t^{next}$: time period of next inspection
+    \item $Score_{i,t^{next}}$: inspection score from the next inspection
+    \item $\tau_t$: time fixed effect
+    \item $\delta_i$: restaurant fixed effect
+    \item $\varepsilon_{it}$: two-way clustered at zipcode and inspector levels\footnote{ (Cameron at el 2009)}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Empirical Strategy}
+A challenge of OLS is that $SCORE_{it}$ is endogenous
+\begin{itemize}
+\item If $\beta$ positive, places that do poorly in the past tend to do poorly in the future
+\begin{itemize}
+\item Restaurant FE doesn't fix problem if we have persistence
+\end{itemize}
+\item If $\beta$ is negative, cannot rule out mechanical mean reversion.  
+\end{itemize}
+\end{frame}
+
+\subsection{Inspector Specific Stringencies as Instrument}
+\begin{frame}{Use Inspector Assignment as Instrument}
+Instrument for when inspector $j$ assigned to restaurant $i$
+    \begin{align*}
+        Z_{ij} = \frac{1}{n_j - I_{ij}} \left( \sum_{kjt\neq ijt}   Y_{kjt}\right)
+    \end{align*}
+    \begin{itemize}
+    \item $n_j$ total number of inspections done by inspector $j$
+    \item $I_{ij}$ is the number of times inspector $j$ has inspected restaurant $i$
+    \item $Y_{kjt}$ is the outcome used to calculate inspector tendencies
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Inspector Stringency is Highly Predictive of Inspection Score}
+\begin{align*}
+    score_{it} = \gamma Z_{it} + \delta_i + \tau_t + \varepsilon_{it}
+\end{align*}
+\footnotesize{where $Z_{it}$ is the leave-out propensity of inspector assigned to restaurant $i$ in period $t$.}
+\begin{table}[h!]
+\centering
+\scalebox{0.8}{\input{../../Tables/FirstStage_F.tex} }
+\footnotetext{\tiny{First column consists of all inspections after 10/1/2010. The sample for the second column is reduced to inspections with non-empty zipcode, chain indicator, cuisine type, venue type, and service type. Standard errors are two-way clustered at the inspector and zipcode level.}}
+\label{first_stage_reg}
+\end{table}
+\end{frame}
+
+\begin{frame}{Graphical Representation of First Stage}
+    \begin{figure}
+        \centering
+        \includegraphics[scale = 0.38]{first_stage_score.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{5. Assignment Process of Inspectors to Restaurants}
+\begin{itemize}
+\item DOHMH claims that each inspector is randomly assigned to each inspection
+\item Implies: 
+\begin{align*}
+Z_{ijt} = \beta X_i + \delta L_{i,t-1} + \varepsilon,
+\end{align*}
+with $X_i$ as restaurant characteristics (cuisine, service type, venue type, chain, etc) and $L_{i,t-1}$ as restaurant specific lag terms (previous scores and previous grades), $\beta = \delta = 0$. 
+
+%\tem Inspectors do not specialize based on locations or types of restaurant
+%\item The same inspector rarely inspect the same restaurant twice in a roll
+%\item An average inspection takes 1.75 hours, and an inspector conducts 3.22 inspections per day. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Coefficients Close to 0 and Insignificant}
+\begin{table}
+\scalebox{0.5}{
+\input{../../Tables/FirstStage/random.tex}}
+\footnotetext{\tiny{Standard errors are two-way clustered at the inspector and restaurant level.}}
+\end{table}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+\begin{frame}{Do inspectors specialize by geography?}
+\begin{itemize}
+\item Calculate HHIs of Zips that inspectors inspect and HHIs of Inspectors who inspect those Zips
+\item Seeing if inspectors focus on certain Zips or certain Zips only get inspected by few inspectors
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.45]{zip_herf.png}
+    \caption{\tiny{HHI for each inspector is based on the distribution of Zipcodes of inspections they conducted. HHI for each zipcode is based on the distribution inspectors that conducted inspections in it.}}
+\end{figure}
+\end{frame}
+
+\begin{frame}{TSLS Regression Results}
+\begin{table}[]
+    \centering
+\scalebox{0.5}{
+\begin{tabular}{lcccc} \hline
+\textbf{All Initials Inspections} & (1) & (2) & (3) & (4) \\
+VARIABLES & OLS & OLS & IV & IV \\ \hline
+ &  &  &  &  \\
+Score & 0.182*** & 0.134*** & -0.262*** & -0.233*** \\
+ & (0.00763) & (0.00654) & (0.0330) & (0.0253) \\
+ &  &  &  &  \\
+Observations & 156,323 & 156,317 & 156,323 & 156,317 \\
+Restaurant Controls & No & Yes & No & Yes \\
+\multicolumn{5}{c}{ Robust standard errors in parentheses} \\
+\multicolumn{5}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\end{tabular}
+}
+
+\scalebox{0.45}{
+\begin{tabular}{lcccc} \hline
+\textbf{Initial Scores > 13}  & (1) & (2) & (3) & (4) \\
+VARIABLES & OLS & OLS & IV & IV \\ \hline
+ &  &  &  &  \\
+Score & 0.148*** & 0.115*** & -0.207*** & -0.187*** \\
+ & (0.00716) & (0.00650) & (0.0267) & (0.0224) \\
+ &  &  &  &  \\
+Observations & 104,736 & 104,728 & 104,736 & 104,728 \\
+Restaurant Controls & No & Yes & No & Yes \\
+\multicolumn{5}{c}{ Robust standard errors in parentheses} \\
+\multicolumn{5}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\end{tabular}
+}
+
+\scalebox{0.45}{
+\begin{tabular}{lcccc} \hline
+\textbf{Initial Scores $\leq$ 13}  & (1) & (2) & (3) & (4) \\
+VARIABLES & OLS & OLS & IV & IV \\ \hline
+ &  &  &  &  \\
+Score & 0.613*** & 0.398*** & -3.041*** & -1.902*** \\
+ & (0.0229) & (0.0209) & (0.532) & (0.256) \\
+ &  &  &  &  \\
+Observations & 51,451 & 51,442 & 51,451 & 51,442 \\
+Restaurant Controls & No & Yes & No & Yes \\
+\multicolumn{5}{c}{ Robust standard errors in parentheses} \\
+\multicolumn{5}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\end{tabular}
+}
+\end{table}
+\end{frame}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Impact of Violation Citations on Restaurant Cleanliness}
+\begin{frame}{TSLS Regression Results}
+\begin{table}
+\centering
+\scalebox{0.6}{\input{../../Tables/shutdown_next.tex}}
+\footnotetext{\tiny{Standard errors are two-way clustered at zipcode and inspector levels. Closure samples exclude inspections resulting in scores over 28 points.}}
+\end{table}
+
+\end{frame}
+
+\subsection{Multi-Tasking}
+\begin{frame}{Multi-Dimensionality of Food Inspections}
+    \begin{itemize}
+    \item Individual Violation Codes Groped into Eight Groups: 
+    \begin{figure}
+        \centering
+        \includegraphics[scale = 0.3]{viol_group_pie.png}
+    \end{figure}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Multi-dimensional 1st Stage}
+    Instrument Construction:
+    \begin{align*}
+        Z_{ijg} = \frac{1}{n_j - I_{ij}} \left(\sum_{kjgt \neq ijgt} \# Cited_{ijgt}\right)
+    \end{align*}
+    \pause
+    1st Stage:
+    \begin{align*}
+        \# Cited_{ijgt} = \sum_{g'\in \mathcal{G}} \theta_{gg'}Z_{ijg'} + \varepsilon_{ijgt} 
+    \end{align*}
+    \begin{itemize}
+    \item $\# Cited_{ijgt}$ is the number of group $g$ violation that inspector $j$ finds in restaurant $i$ at time $t$ and $\mathcal{G}$ is the set of violation groups
+    \item $\theta_{gg'}$: measures how inspector's propensity to find violation in group $g'$ relates to one's probability of finding violation in group $g$ 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Multi-task First Stage Equations}
+\begin{table}[]
+\scalebox{0.4}{
+\input{../../Tables/Tasks/tasks_first_cnt}}
+\end{table}
+\end{frame}
+
+\begin{frame}{Multi-dimensional 2nd Stage}
+\begin{align*}
+    \# Cited_{igt^{next}} = \sum_{g' \in \mathcal{G}} \beta_{gg'} \# Cited_{igt} + \delta_i + \tau_t + \varepsilon_{igt},
+\end{align*}
+where 
+\begin{itemize}
+\item $\# Cited_{igt}$: number of group $g$ violations that restaurant $i$ receives on date $t$
+\item $\tau_t$: date fixed effect
+\item $\delta_i$: restaurant fixed effect
+\end{itemize}
+\end{frame}
+\begin{frame}{How Current Citations Affect Subsequent Citations}
+\begin{table}[]
+    \centering
+    \scalebox{0.4}{
+    \input{../../Tables/Tasks/tasks_IV_cnt.tex}}
+\footnotetext{Standard errors are two-way clustered at zipcode and inspector levels}
+\end{table}
+\end{frame}
+
+\subsection{Robustness}
+\begin{frame}{Concerns of Empirical Strategy}
+Exclusion Restriction
+\begin{itemize}
+\item Inspectors adjust their grading, given the identities of the previous inspectors
+\begin{itemize}
+\item Unlikely, given geographically dispersed and random assignment, inspectors need to mentally track the tendencies of hundreds of inspectors
+\end{itemize}
+\item Inspectors affect restaurant outcomes through channels other than the inspections
+\end{itemize}
+\pause
+Monotonicity condition
+\begin{itemize}
+    \item The inspection score is strictly increasing in inspector stringency
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Monotonicity Tests}
+\begin{itemize}
+\item Because inspections are multi-dimensional, monotonicity might not hold
+\begin{itemize}
+\item Ex. A frozen yogurt establishment may get a better score from a more stringent inspector if that inspector cares only about hot food being kept above a certain temperature
+\end{itemize}
+\item Two empirical implications:
+\begin{itemize}
+\item Test 1: Stringent inspectors should be strict for different types of restaurants 
+\begin{itemize}
+\item Run first stage for various sub-samples (baseline sample)
+\end{itemize}
+\item Test 2: Inspectors who are strict for one type of restaurants should be strict for other types
+\begin{itemize}
+\item Recalculate inspector stringency for each sub-sample with inspection results outside of that sub-sample (inverse-sample)
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}{Monotonicity Test Results}
+\begin{table}[h!]
+\scalebox{0.45}{\input{../../Tables/Mono/quartile} \input{../../Tables/Mono/quartileinverse} }
+
+\scalebox{0.45}{\input{../../Tables/Mono/boro} \input{../../Tables/Mono/boroinverse} }
+
+\scalebox{0.45}{\input{../../Tables/Mono/cuisine_mono} \input{../../Tables/Mono/cuisine_monoinverse}  }
+
+\scalebox{0.45}{\input{../../Tables/Mono/service} \input{../../Tables/Mono/serviceinverse}  }
+\footnotetext{\tiny{To reduce noise, only inspections conducted by inspectors who have done at least 50 inspections remain in the regressions.} }
+\end{table}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+\begin{frame}{More Stringent Inspector More Likely to Cite All Groups}
+
+\begin{align*}
+    Pr(Cited_{igt}) = \beta LO\_SCORE_{ij} + \delta X_i + \tau_t \varepsilon
+\end{align*}
+\begin{table}
+\scalebox{0.4}{
+\begin{tabular}{lcccccccc} \hline
+ & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) \\
+VARIABLES & Facility Maintenance & Food Protection & Personal Hygiene & Food Temperature & Vermin/Garbage & Gen. Food Source & Facility Design & Crit. Food Source \\ \hline
+ &  &  &  &  &  &  &  &  \\
+Inspector Propensity & 0.00661*** & 0.0171*** & 0.0162*** & 0.0178*** & 0.0149*** & 0.00477*** & 0.00554*** & 0.00100*** \\
+ & (0.00157) & (0.000965) & (0.00111) & (0.00133) & (0.00114) & (0.000753) & (0.000675) & (0.000163) \\
+ &  &  &  &  &  &  &  &  \\
+Observations & 330,466 & 330,466 & 330,466 & 330,466 & 330,466 & 330,466 & 330,466 & 330,466 \\
+ Time FE & YES & YES & YES & YES & YES & YES & YES & YES \\ \hline
+\multicolumn{9}{c}{ Robust standard errors in parentheses} \\
+\multicolumn{9}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\end{tabular}
+}
+\end{table}
+\end{frame}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Impact of Discrete Letter Grades}
+\subsection{Restaurant and Inspector Responses to Letter Grades}
+\begin{frame}{Issues of Mapping from Multi-dimensional Inspection Results into Discrete Grades}
+\begin{itemize}
+\item For inspectors and restaurants, creates discontinuities in incentives
+\item For consumers, sanitation qualities of restaurants with the same grade are indistinguishable. 
+\end{itemize}
+\end{frame}
+
+\iffalse
+\begin{frame}{Reasons to Expect Bunching}
+\begin{itemize}
+\pause
+\item Reasons for inspectors to bunch:
+\begin{itemize}
+\item Save additional trip for re-inspection
+\item Save administrative cost of adjudication
+\item Discomfort of giving out a lower grade on the margin 
+\end{itemize}
+\pause
+\item Reasons for restaurants to bunch:
+\begin{itemize}
+\item Avoid fines (\$200 - \$1000 per violation)
+\item Much easier to do during re-inspection than initial inspection
+\end{itemize}
+\end{itemize}
+\end{frame}
+\fi
+
+\begin{frame}{Scores Clearly Bunch Around Grade Thresholds}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.4]{../../Figures/init_score.png}
+    \includegraphics[scale = 0.4]{../../Figures/re_score.png}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+\begin{frame}{Bunching Have Gotten More Pronounced}
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.25]{init_across_time.png}
+    
+    \includegraphics[scale = 0.25]{Re_across_time.png}
+\end{figure}
+\end{frame}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Consumer Response to Letter Grades}
+
+\begin{frame}{Letter Grades and Consumer Perception }
+\begin{itemize}
+\item Restaurants with worse inspection scores receive more complaint calls
+\item The effect driven mostly by the discrete letter grades
+\begin{itemize}
+\item Visible jumps around the letter grade thresholds
+\item Effect concentrated around the month of the letter grade change (robust to placebo tests)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Sample Construction}
+\begin{itemize}
+\item Convert from inspection level data to a restaurant-month level panel data
+\item When an inspection or adjudication occurs in the middle of a month: 
+\begin{itemize}
+\item Consider only calls that were made in between the latest event and the end of the month
+\item Calculate a weight variable as the fraction of days since the event to the end of the month
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Cross Sectional: use semi-parametric regression of probability of receiving at least one complaint call in a month on inspection scores
+\begin{align*}
+    Pr(Called_{i,t}) = \delta_i + \tau_t + \sum_{s = 0} ^{50} \beta_s \textbf{1}_{\{SCORE_{it} = s\}} + \varepsilon_{it}
+\end{align*}
+\item Longitudinal: add lead and lag months as placebo tests
+\begin{align*}
+Pr(Called_{i,t}) = \delta_i + \tau_t +\sum_{l = -5}^5 \sum_{g \in \mathcal{G} } \beta_{gl} \textbf{1}_{\{grade_{i,t+l} = g\}} + \varepsilon_{it}
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\centering
+\includegraphics[scale = 0.35]{../../Figures/Calls/score_calls_hist_vis}
+\footnotetext{\tiny{The grey density is the histogram of scores after adjudication. Visible scores are ones given post adjudication. Underlying scores are the ones given during cycle-inspections and may not contribute to letter grades.}  }
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\centering
+\includegraphics[scale = .35]{../../Figures/Calls/lead_lag_calls_letter}
+\footnotetext{\tiny{B, C, and P refers to letter grade B, C, and Grade Pending, respectively. }}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\iffalse
+
+\begin{frame}{How does Inspection Grades Affect Restaurant Survivals?}
+\begin{itemize}
+\item Restaurant industry is high churn, and measuring government regulation hurts these business has policy implication
+\item Other studies that use Dif-in-Dif of changes grades suffer from spurious correlation
+\item I do not observe exact date of closure
+\begin{itemize}
+\item Infer based on having no inspections since 2014. 
+\item Over counting closures
+\item Confirm my counts using Yelp or other data sources
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}{Empirical Strategy}
+\begin{itemize}
+\item Convert from inspection level data to a restaurant-year level panel data
+\begin{itemize}
+\item Restaurants that receive higher scores experience their next inspections earlier, biasing their survival calculations 
+\end{itemize}
+\item
+\begin{align*}
+    Pr(Open_{i,t+1}) = \delta_i + \tau_t + SCORE^{avg}_{it} + \varepsilon_{it} \\
+    SCORE^{avg}_{it} = \gamma Z^{avg}_{it} + \delta_i + \tau + \epsilon_t
+\end{align*}
+where $SCORE^{avg}_{it}$ and $Z^{avg}_{it}$ are the average score and inspector propensity seen by restaurant $i$ in year $t$. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Restaurant Survival Summary Statistics}
+\begin{table}[htbp]\centering
+\caption{\label{year_by_open_next} 
+\textbf{Annual Closure Rates}}
+\begin{tabular} {@{} l r  r r @{}} \\ \hline
+& \multicolumn{3}{@{} c @{}}{\textbf{}} \\
+\textbf{} & 
+closed &open &Total \\  \hline
+2008&     18.6&     81.4&    100.0\\
+2009&     18.8&     81.2&    100.0\\
+2010&     15.4&     84.6&    100.0\\
+2011&     15.7&     84.3&    100.0\\
+2012&     15.2&     84.8&    100.0\\
+2013&     14.8&     85.2&    100.0\\
+2014&     14.5&     85.5&    100.0\\
+Total&     16.0&     84.0&    100.0\\\hline 
+\multicolumn{4}{@{}l}{}
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}{Inspection Results and Restaurant Survival}
+\begin{table}[]
+    \centering
+    \scalebox{0.7}
+    {
+\begin{tabular}{lcc} \hline
+ & (1) & (2) \\
+VARIABLES & OLS & IV \\ \hline
+ &  &  \\
+SCORE\_avg & -0.000760*** & -0.000156 \\
+ & (0.000146) & (0.000722) \\
+ &  &  \\
+ Observations & 87,779 & 87,779 \\ \hline
+\multicolumn{3}{c}{ Robust standard errors in parentheses} \\
+\multicolumn{3}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\end{tabular}
+}
+\end{table}
+\end{frame}
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Discussion and Conclusion}
+
+\begin{frame}{Conclusion and Discussion}
+Conclusion
+\begin{itemize}
+\item Marginally more citations leads to improved subsequent inspection results
+\begin{itemize}
+\item Some complementarity in cleanliness (ex. better refrigerator leads to few food temperature and food protection violations). 
+\end{itemize}
+\item Both restaurants and inspectors respond by bunching around the threshold
+\item Customer perception changes significantly once a restaurant experiences a grade change.
+\end{itemize}
+Policy Implication
+\begin{itemize}
+\item Instead of using posting letter grades, post the numerical scores
+\end{itemize}
+\end{frame}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Empirical Strategy}
+\begin{itemize}
+\item Convert from inspection level data to a restaurant-year level panel data
+\begin{itemize}
+\item Restaurants that receive higher scores experience their next inspections earlier, biasing their survival calculations 
+\end{itemize}
+\item
+\begin{align*}
+    Pr(Open_{i,t+1}) = \delta_i + \tau_t + Grade^{avg}_{it} + \varepsilon_{it} \\
+    SCORE^{avg}_{it} = \gamma Z^{avg}_{it} + \delta_i + \tau + \epsilon_t
+\end{align*}
+where $Grade^{avg}_{it}$ and $Z^{avg}_{it}$ are the day-weighted annual average score and inspector propensity seen by restaurant $i$ in year $t$. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Inspection Results and Restaurant Survival}
+\begin{table}
+\centering
+\begin{tabular}{lcc} \hline
+ & (1) & (2) \\
+VARIABLES & OLS & IV \\ \hline
+ &  &  \\
+A & 0.0487*** & 0.0497*** \\
+ & (0.00682) & (0.0167) \\
+C & -0.105*** & 0.0518 \\
+ & (0.0198) & (0.0906) \\
+ &  &  \\
+ Observations & 88,680 & 88,680 \\ \hline
+\multicolumn{3}{c}{ Robust standard errors in parentheses} \\
+\multicolumn{3}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\end{tabular}
+\footnotetext{Letter B is the baseline. Standard errors cluster at Zipcode level.}
+\end{table}
+\end{frame}
+
+\begin{frame}{Regression Results (Modified Scores)}
+\begin{itemize}
+\item Repeat earlier regression but replace score with modified score
+\item Use only initial inspections that 
+\end{itemize}
+
+\begin{table}[]
+    \centering
+\scalebox{0.65}{
+\begin{tabular}{lcccc} \hline
+\textbf{Initial Scores > 13}  & (1) & (2) & (3) & (4) \\
+VARIABLES & OLS & OLS & IV & IV \\ \hline
+ &  &  &  &  \\
+Modified Score & 0.126*** & 0.0984*** & -0.238*** & -0.215*** \\
+ & (0.00584) & (0.00532) & (0.0322) & (0.0270) \\
+ &  &  &  &  \\
+Observations & 104,736 & 104,728 & 104,736 & 104,728 \\
+Restaurant Controls & No & Yes & No & Yes \\
+\multicolumn{5}{c}{ Robust standard errors in parentheses} \\
+\multicolumn{5}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\end{tabular}
+}
+\end{table}
+\end{frame}
+
+\begin{frame}{Impact of Inspection Score on Restaurant Going to Adjudication}
+\begin{align*}
+    Pr(PursueAdjudication_{it}|grade_{it} \neq A) = \beta_a Score_{it} + \varepsilon_{it} \\
+    Pr(ScoreModified_{it}|PursueAdjudication_{it}) = \beta_b Score_{it} + \varepsilon_{it}     
+\end{align*}
+\end{frame}
+
+\begin{frame}{Results}
+\begin{table}[]
+    \centering
+    \scalebox{0.6}{
+\begin{tabular}{lcccccc} \hline
+ & (1) & (2) & (3) & (4) & (5) & (6) \\
+VARIABLES & OLS & OLS & OLS & IV & IV & IV \\ \hline
+ &  &  &  &  &  &  \\
+Score & -0.00149*** & -0.00150*** & -0.00196*** & -0.000988 & -0.00146** & -0.00173*** \\
+ & (0.000188) & (0.000177) & (0.000176) & (0.000604) & (0.000617) & (0.000533) \\
+ &  &  &  &  &  &  \\
+Observations & 63,993 & 63,986 & 53,004 & 63,993 & 63,986 & 53,004 \\
+Restaurant Control & No & Yes & No & No & Yes & No \\
+ Restaurant FE & No & No & Yes & No & No & Yes \\ \hline
+\multicolumn{7}{c}{ Robust standard errors in parentheses} \\
+\multicolumn{7}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\end{tabular}
+}
+\scalebox{0.6}{
+\begin{tabular}{lcccccc} \hline
+ & (1) & (2) & (3) & (4) & (5) & (6) \\
+VARIABLES & OLS & OLS & OLS & IV & IV & IV \\ \hline
+ &  &  &  &  &  &  \\
+Score & -0.234*** & -0.234*** & -0.251*** & -0.209*** & -0.203*** & -0.192*** \\
+ & (0.00835) & (0.00833) & (0.00823) & (0.0233) & (0.0229) & (0.0186) \\
+ &  &  &  &  &  &  \\
+Observations & 58,217 & 58,209 & 46,915 & 58,217 & 58,209 & 46,915 \\
+Restaurant Control & No & Yes & No & No & Yes & No \\
+ Restaurant FE & No & No & Yes & No & No & Yes \\ \hline
+\multicolumn{7}{c}{ Robust standard errors in parentheses} \\
+\multicolumn{7}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\end{tabular}
+}
+\end{table}
+\end{frame}
+
+\begin{frame}{Almost All $\theta_{gg}$ close to 1 (Visual)}
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.27]{Task_reg.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{5. Are Inspectors Randomly Assigned?}
+\begin{itemize}
+\item Calculate Inspector Average Scores
+\pause
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.28]{avg_score_hist.png}
+\end{figure}
+\pause
+\item Split sample into inspections done by inspectors with average scores above and below median average score 
+\item Test $H_0$: Distribution of zipcodes, cuisine types, venue types, service types are the same across two samples
+\pause
+\item Result: fail to reject for all categories (p-values > 0.99). 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Sanitation Disclosure Methods Across Cities}
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.3]{GradingLandscape.png}
+\end{figure}
+\footnotesize{Source: Ho (2012)}
+\end{frame}
+
+
+\begin{frame}{Do Inspectors Exercise Similar Discretion Across Different Cuisines?}
+    \begin{align*}
+        Pr(vio\_sum_i < score_i | vio\_sum \in \mathcal{B}) = \sum_{c \in \mathcal{C}} \beta_c \mathbbm{1}_{\{cuisine_i = c\}} + \varepsilon_i
+    \end{align*}
+    where $\mathcal{B} = \{12,13,26,27\}$, include time FE. 
+\end{frame}
+
+\begin{frame}{Is the Grading System Fair Across Different Cuisines?}
+\pause
+\begin{itemize}
+\item Some opponents of the NYC grading system the current standards does not align with food preparation practices from certain cuisines
+\end{itemize}
+\pause
+\begin{multicols}{2}
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.25]{pie.png}
+\end{figure}
+\pause
+\begin{align*}
+    Score_i = \sum_{c \in \mathcal{C}} \beta_c \mathbbm{1}_{\{cuisine_i = c\}} + \varepsilon_i
+\end{align*}
+\indent $\mathcal{C}$: set of all cuisines
+\end{multicols}
+\end{frame}
+
+\begin{frame}{Is the Grading System Fair Across Different Cuisines?}
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.35]{cuisine_scores.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Which Layout is Best?}
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.35]{KingCounty.png}
+\end{figure}
+\end{frame}

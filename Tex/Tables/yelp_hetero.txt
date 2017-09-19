@@ -1,0 +1,18 @@
+		(1)	(2)	(3)
+VARIABLES	LABELS	Score	Closure	Grade A
+				
+SCORE	Score	-0.237***	-0.00118***	0.00211***
+		(0.0190)	(0.000231)	(0.000610)
+SCORE_plus4	Score $\times 1_{\{rating \geq 4\}}$	0.0264	0.000240	-0.00138
+		(0.0189)	(0.000225)	(0.000857)
+SCORE_h_e	Score $\times$ $1_{\{exposure \geq e_{median}\}}$	0.00430	9.93e-05	0.000321
+		(0.00824)	(8.64e-05)	(0.000252)
+SCORE_plus4_h_e	Score $\times 1_{\{rating \geq 4\}} \times 1_{\{exposure \geq e_{median}\}}$	-0.0196	-0.000293**	5.82e-05
+		(0.0119)	(0.000126)	(0.000432)
+				
+Observations		101,732	101,732	101,732
+Inspection Date FE		YES	YES	YES
+Restaurant FE		YES	YES	YES
+dependent mean		21.52	0.0169	0.353
+Robust standard errors in parentheses				
+*** p<0.01, ** p<0.05, * p<0.1				

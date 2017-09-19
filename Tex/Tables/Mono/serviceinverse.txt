@@ -1,0 +1,10 @@
+Inverse-Sample				
+		(1)	(2)	(3)
+VARIABLES	LABELS	Counter Service	Takeout Service	Wait Service
+				
+LO_Inv_sample	Estimate	1.064***	0.810***	1.160***
+		(0.0269)	(0.0181)	(0.0236)
+				
+Observations		126,011	124,867	72,645
+Robust standard errors in parentheses				
+*** p<0.01, ** p<0.05, * p<0.1				

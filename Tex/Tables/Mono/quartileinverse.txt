@@ -1,0 +1,10 @@
+Inverse-Sample					
+		(1)	(2)	(3)	(4)
+VARIABLES	LABELS	1st Quartile	2nd Quartile	3nd Quartile	4th Quartile
+					
+LO_Inv_sample	Estimate	0.369***	0.612***	0.779***	1.609***
+		(0.0340)	(0.0247)	(0.0254)	(0.0674)
+					
+Observations		75,188	81,328	81,481	85,851
+Robust standard errors in parentheses					
+*** p<0.01, ** p<0.05, * p<0.1					

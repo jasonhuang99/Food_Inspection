@@ -1,0 +1,10 @@
+Inverse-Sample						
+		(1)	(2)	(3)	(4)	(5)
+VARIABLES	LABELS	American	Pizza/Italian	Chinese	Cafe/Coffee/Tea	Japanese
+						
+LO_Inv_sample	Estimate	0.929***	0.990***	1.070***	0.782***	1.098***
+		(0.0298)	(0.0199)	(0.0449)	(0.0363)	(0.0273)
+						
+Observations		74,954	38,312	38,424	13,292	10,910
+Robust standard errors in parentheses						
+*** p<0.01, ** p<0.05, * p<0.1						

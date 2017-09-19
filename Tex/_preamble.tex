@@ -1,0 +1,102 @@
+%_ PACKAGES __________________________________________________________________________ %
+	
+    %__ INPUT/OUTPUT LANGUAGE _________________________________ %
+    \usepackage[USenglish]{babel}
+    \usepackage[utf8]{inputenc}
+    \usepackage[T1]{fontenc}
+    %\usepackage{indentfirst}
+
+    %__ MATH __________________________________________________ %
+    \usepackage{amsfonts}
+    \usepackage{amssymb}
+    \usepackage{amsmath}
+    \usepackage{amsthm}
+    \usepackage{bbm}
+    
+    %__ THEORY __________________________________________________ %
+    \newtheorem{name}{Printed output}
+	\newtheorem{lemma}{Lemma}
+	\newtheorem{prop}{Proposition}
+	\newtheorem{cor}{Corollary}
+	\theoremstyle{definition}
+	\newtheorem{definition}{Definition}
+
+    %__ GRAPHS & TABLES________________________________________ %
+    \usepackage{graphicx}
+    \usepackage{subfig}
+    \usepackage{booktabs}
+    %\usepackage{multirow}
+    \usepackage{array}
+    \usepackage{caption}
+    %\usepackage{subcaption}
+    %\usepackage[flushleft,online,para]{threeparttable}
+    
+    %\usepackage{parskip}                       % WHAT IS THIS FOR?
+
+    \usepackage{floatrow}
+        \floatsetup[table]{style=plaintop}     % LEAVE TABLE CAPTIONS AT THE TOP
+    %\usepackage[nolists,nomarkers]{endfloat}             % PUT FIGURES AT THE END OF DOCUMENT; DOESN'T WORK WITH \usepackage{float}
+
+    \usepackage{tabularx}
+        \newcolumntype{Z}{>{\centering\arraybackslash}X}
+        \newcolumntype{L}{>{\raggedright\arraybackslash}X}
+
+    \usepackage{dcolumn}
+        \newcolumntype{d}[1]{D{.}{.}{#1}}
+
+    \usepackage{rotating}                      % for **sideways**tables
+    \usepackage{lscape}
+    \usepackage{pdflscape}
+
+    %__ BIBLIOGRAPHY __________________________________________ %
+    \usepackage[round]{natbib}
+
+    %__ PDF, DISPLAY & PRODUCTIVITY ___________________________ %
+    \usepackage{xcolor}
+        \definecolor{darkblue}{rgb}{0,0,0.4}
+    \usepackage{hyperref}
+        \hypersetup{
+            colorlinks = true,
+            linkcolor = darkblue,
+            citecolor = darkblue,
+            pdfborder = 0 0 0,
+            pdfdisplaydoctitle = true,
+            pdfhighlight = /N,
+            pdfpagelayout = OneColumn,
+            pdfpagemode = UseNone,
+            pdfstartview = {FitH},
+            pdfauthor = {{AB, CF \& JR}},
+            pdftitle = {{DYN}},
+            pdfsubject = {{}}
+        }
+
+    \usepackage[textsize=footnotesize, colorinlistoftodos, textwidth=4cm, obeyDraft]{todonotes}
+    %\usepackage{fixme}
+        % commands \fxnote; \fxwarnin; \fxerror; \fxfatal
+        % \fxsomething{options}{note}{TEXT}* highlights the TEXT
+
+    \usepackage{geometry}
+        \geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+    \usepackage{setspace}
+        \onehalfspacing
+
+    \usepackage[bottom, multiple]{footmisc}    % keep footnotes at the bottom of the page, and allow for multiple footnotes at one place.
+
+    \usepackage{verbatim}
+    \usepackage[normalem]{ulem}     % strikethrough fonts
+    \usepackage{mathpazo}
+
+    %\usepackage{syntonly}       % if uncommented, this will prevent latex to produce
+    %    \syntaxonly             %   any output. latex will only check for syntax.
+    %\usepackage[displaymath,tightpage]{preview}
+    %\graphicspath{{//graphs/}}
+
+    %__ APPENDIX _____________________________________________ %
+    \usepackage[toc,page]{appendix}
+
+%__ COMMANDS _________________________________________________________________________ %
+    \newcommand{\mc}{\multicolumn}
+    \newcommand{\lbar}{\underline}
+    \newcommand{\ubar}{\overline}
+
+

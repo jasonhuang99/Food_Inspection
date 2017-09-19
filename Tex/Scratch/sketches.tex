@@ -1,0 +1,130 @@
+\subsection{Incorporating Savings}
+
+\par The individuals vary according to their abilities $\theta$ paying both commodity and income taxes. Their utility function depends on their consumption in the two periods and on their labor supply. Their budget constraint is therefore:
+\begin{align}
+    (1+t)c+s \leq k\theta l- T(k\theta l)
+\end{align}
+\par Households maximize their utilities choosing their labor supply $l$, what proportion of their income they will report $k$, and their savings $s$. 
+
+\begin{align}
+    U\left(\frac{\theta l-T(k\theta l)-s}{1+t}, s-C((1-k)\theta l,p),l\right)
+\end{align}
+Assuming that U() and C() are such that an interior solution is guaranteed, let $k^*(s,l)$ is the optimal evasion given $s$ and $l$. 
+
+\begin{align}
+    U\left(\frac{\theta l-T(k^*(s,l)\theta l)-s}{1+t}, s-C((1-k^*(s,l))\theta l,p),l\right)
+\end{align}
+
+The households choose the optimal $s$, which by the envelope theorem is:
+
+\begin{align}
+    U_1(.)\frac{1}{1+t}=U_2(.)
+    \label{foc_l}
+\end{align}
+
+On the other hand the FOC with respect to $l$, is:
+
+\begin{align}
+    -U_1(.)\frac{T'(K^*\theta l[k^E \theta +k^E \theta l k^E_l \theta l])}{1+t}-U_2(.)C'((1-k^E)\theta l,p)[(1-k^E)\theta l,p]+U_3(.)=0
+\end{align}
+
+The FOC with respect to $l$ can always be satisfied due to the non-linearity of $T'()$. Hence, only equation \ref{foc_l} is imposed in the SP problem.
+
+Let $g(\theta)$ be the pareto weights given to the individual with ability $\theta$. The SP maximizes:
+
+\begin{align}
+    \int_{\theta \in \Theta}  g(\theta) U\left(\frac{\theta l-T(k^*(s,l)\theta l)-s}{1+t}, s-C((1-k^*(s,l))\theta l,p),l\right) dF(\theta)
+\end{align}
+
+subject to (i) the incentive compatibility constraint: 
+
+\begin{align}
+    \theta = argmax_{\hat{\theta} \in \Theta}U\left(\frac{\hat{\theta} l-T(k^*(s,l)\hat{\theta} l)-s}{1+t}, s-C((1-k^*(s,l))\hat{\theta} l,p),l\right) \nonumber
+\end{align}
+
+Assuming that the $U(.)$ is a concave function in $\hat{\theta}$, and using the envelope theorem, the IC can be rewritten as: 
+
+\begin{align}
+    V'(\theta)=[U_1(.)-C_1(.)]l^*(\theta)
+\end{align}
+
+(ii) the resource constraint:
+
+\begin{align}
+    \int_{\theta\in\Theta}[\bar{y}(\theta)-c(\theta)]
+\end{align}
+
+and an implementability constraint that requires that households are maximizing their utilities given the reported income required by the social planner for a reported type $\hat{\theta}$:
+
+\begin{align}
+    max U(c(\hat{\theta})+l \theta, l)-((1-k)l\theta, l)-C((1-k))
+\end{align}
+
+\section{Appendix}
+
+\subsection{Normalization of the Tax Schedule}
+
+Consider the original budget constraint of the individual of type $\theta$:
+
+\begin{align}
+    (1+t_c)c(\theta)+(1+t_s)s(\theta)\leq Y(\theta)-T(Y(\theta)) \equiv R(\theta)
+    \label{budget}
+\end{align}
+
+Note that there is a one-to-one map between $R(\theta)$ and $T(\theta)$
+
+\begin{align*}
+    \frac{1-T'(Y(\theta))}{1+t_s}=\frac{1+t_s-t_s-T'(Y(\theta))}{1+t_s}=1-\frac{T'(Y(\theta))+t_s}{1+t_s}
+\end{align*}
+
+And that:
+
+\begin{align*}
+    \frac{1+t_c}{1+t_s}=\frac{1+t_s+t_c-t_s}{1+t_s}=1+\frac{t_c-t_s}{1+t_s}
+\end{align*}
+
+Now define $\tau(Y(\theta))=\frac{T'(Y(\theta))+t_s}{1+t_s}$ and $\tau_c\equiv \frac{t_c-t_s}{1+t_s}$. The tax schedule $(t_c, t_s, T'(Y(\theta)))$ is equivalent to $(\tau_c, 0, \tau(Y(\theta)))$. Is it ok to define the tax schedules in terms of marginal income tax?
+\end{document}
+
+7/12/Stuff we don't need
+\eqref{foc_ybar_t},   }
+
+Using \eqref{foc_ybar_t}, we simplify \eqref{opt_t_obj} to
+\begin{align}
+\int_{\underline{\theta}}^{\bar{\theta}} \left( 2t + \frac{T'(\bar{y})(1 - t) }{dy/d\bar{y}} \right) \frac{d \tilde{y}_t(\theta,\bar{y})}{dt} \Big|_{\bar{y}_t(\theta)} f(\theta) d\theta = 0.
+\label{com_t_welfare_int}
+\end{align}
+\textcolor{blue}{Note to Juan. A quick sanity check shows that when there is no evasion $d\tilde{y}_t /dt = 0$, the FOC above puts no restriction on $t$, so commodity tax is not needed when we have optimal income tax, i.e. Atkinson Stliglitz result. } \textcolor{red}{The same should be true if evasion exists but does not respond to the commodity tax rate, right?} \textcolor{blue}{But if we assume commodity tax cannot be evaded, how evasion behavior not respond to commodity tax rates?}
+Finally, noting that $\frac{d\tilde{y}_t /dt }{dy / d\bar{y}}(1-t) = \frac{d \tilde{y}_t}{d (1-T')}$, we have
+\begin{align}
+2t(1-t) = - 
+\frac{E[T'\tilde{y}\mathcal{E}_{\tilde{y},1-T'}/(1-T')]}{E[\mathcal{E}_{\tilde{y},1-T'} \mathcal{E}_{y,\bar{y}}y \tilde{y}/((1-T')\bar{y})]}
+\end{align}
+Alternatively we could write:
+\begin{align}
+2t = - 
+\frac{E[T'\frac{\partial \tilde{y}_t}{\partial(1-T')}]}{E[\frac{\partial \tilde{y}_t}{\partial t}]}
+\end{align}
+\textcolor{blue}{Or, we can notice that
+\begin{align*}
+T'(1-t) = \phi'(\tilde{y}) 
+\end{align}
+and we can rewrite above as
+\begin{align}
+2t = - \frac{E[\phi'(\tilde{y})  \frac{\partial \tilde{y}_0}{\partial(1-T')}]}{\textcolor{red}{(1-t)}E[\frac{\partial \tilde{y}}{\partial t}]},
+\end{align}
+with $\frac{\partial \tilde{y}_0}{\partial (1-T')}$ as the partial derivative of evasion with respect to marginal retained income when commodity tax is 0. 
+Or, to get a better intuition, let's rewrite \eqref{com_t_welfare_int} as
+\begin{align}
+\int_{\underline{\theta}}^{\bar{\theta}} \left( 2t \frac{d \tilde{y}_t(\theta,\bar{y})}{dt} + \frac{\phi'(\tilde{y})}{\textcolor{red}{1-t}} \frac{\partial \tilde{y}_0}{\partial(1-T')} \right)  \Big|_{\bar{y}_t(\theta)} f(\theta) d\theta = 0.
+\label{com_t_welfare_int2}
+\end{align}
+Now \eqref{com_t_welfare_int2} as some intuition. When we change $t$, we have two opposing effect that impact the social welfare. First, increased $t$ discourage supplying labor, as seen by the first term. Second, higher $t$ also discourage evasion, and the social impact is reflected in the second term. Then, the optimal $t$ is when the two effects averaged across the population is equalized.} \textcolor{red}{Even with your specification I did not understand the interpretation of the first term.}
+
+\textcolor{blue}{From the equation above, we can see that predicting how optimal $t$ changes by changing $p$ isn't obvious.}
+
+
+But differentiating \eqref{tax_cond_t} with respect to $t$, we see that $\frac{\partial \tilde{y}}{\partial t}<0$ for all $t$, and substituting \eqref{opt_com_evade} in \eqref{tax_cond_t} and deriving with respect to $(1-T')$ we get that $\frac{\partial \tilde{y}}{\partial(1-T')}=-\frac{(1-t)}{\phi''(\tilde{y})}<0$ Hence, the commodity tax will be positive if $T'>0$ for a sufficiently large set of $\theta$s.
+
+
+

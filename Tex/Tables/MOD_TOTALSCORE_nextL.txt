@@ -1,0 +1,12 @@
+SCORE <= 13					
+		(1)	(2)	(3)	(4)
+VARIABLES	LABELS	OLS	OLS	IV	IV
+					
+MOD_TOTALSCORE	Modified Score	0.607***	0.392***	-3.085***	-1.924***
+		(0.0229)	(0.0210)	(0.547)	(0.261)
+					
+Observations		51,451	51,442	51,451	51,442
+Restaurant Controls		No	Yes	No	Yes
+Restaurant FE		No	No	No	No
+Robust standard errors in parentheses					
+*** p<0.01, ** p<0.05, * p<0.1					

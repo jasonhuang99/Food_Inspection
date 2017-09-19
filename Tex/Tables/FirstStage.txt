@@ -1,0 +1,14 @@
+Re-inspection		
+		(1)
+VARIABLES	LABELS	Score
+		
+LO_SCORE2	Z	0.948***
+		(0.0111)
+		
+Observations		123,226
+R-squared		0.125
+Restaurant Controls		NO
+Restaurant FE		NO
+F Statistics		7320
+Robust standard errors in parentheses		
+*** p<0.01, ** p<0.05, * p<0.1		

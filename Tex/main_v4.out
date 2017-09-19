@@ -1,0 +1,19 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{New York City Food Inspection and Grading System}{}% 2
+\BOOKMARK [1][-]{section.3}{Data}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Food Inspection Data}{section.3}% 4
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Descriptive Analysis: Bunching Around Thresholds}{subsection.3.1}% 5
+\BOOKMARK [2][-]{subsection.3.2}{311 Calls}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.3}{Yelp Data}{section.3}% 7
+\BOOKMARK [1][-]{section.4}{Stringencies of Inspectors as Instrumental Variable}{}% 8
+\BOOKMARK [2][-]{subsection.4.1}{Inclusion Restriction}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.2}{Assessing the Randomness of Inspector Assignment}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{Empirical Analysis}{}% 11
+\BOOKMARK [2][-]{subsection.5.1}{Impact of Inspection Scores on Subsequent Inspection Results}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.2}{Heterogenous Effect Based on Chain Affiliation and Yelp Characteristics }{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.3}{Multi-task}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.4}{Impact of Inspection Results on 311 Complaint Calls}{section.5}% 15
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 16
+\BOOKMARK [1][-]{section.7}{Appendix}{}% 17
+\BOOKMARK [2][-]{subsection.7.1}{Monotonicity}{section.7}% 18
+\BOOKMARK [2][-]{subsection.7.2}{Matching 311 calls to Food Inspection Data}{section.7}% 19

@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{New York City Food Inspection and Grading System}{}% 2
+\BOOKMARK [1][-]{section.3}{Data}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Food Inspection Data}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{311 Calls}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Descriptive Analysis: Bunching Around Thresholds}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Stringencies of Inspectors as Instrumental Variable}{}% 7
+\BOOKMARK [2][-]{subsubsection.4.0.1}{Inclusion Restriction}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.1}{Assessing the Randomness of Inspector Assignment}{section.4}% 9
+\BOOKMARK [1][-]{section.5}{Empirical Analysis}{}% 10
+\BOOKMARK [2][-]{subsection.5.1}{Impact of Inspection Scores on Subsequent Scores}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.2}{Impact of Inspection Results on Getting an A and Temporary Closure}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.3}{Multi-task}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.4}{Impact of Inspection Results on 311 Complaint Calls}{section.5}% 14
+\BOOKMARK [1][-]{section.6}{Discussion and Steps Going Forward}{}% 15
+\BOOKMARK [1][-]{section.7}{Appendix}{}% 16
+\BOOKMARK [2][-]{subsection.7.1}{Monotonicity}{section.7}% 17

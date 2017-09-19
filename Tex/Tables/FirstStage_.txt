@@ -1,0 +1,14 @@
+Full				
+		(1)	(2)	(3)
+VARIABLES	LABELS	Score	Score	Score
+				
+LO_SCORE2	Z	0.961***	0.997***	1.135***
+		(0.00948)	(0.00983)	(0.0162)
+				
+Observations		330,469	330,466	325,681
+R-squared		0.149	0.201	0.414
+Restaurant Controls		NO	YES	NO
+Restaurant FE		NO	NO	YES
+F Statistics		10271	10270	4908
+Robust standard errors in parentheses				
+*** p<0.01, ** p<0.05, * p<0.1				

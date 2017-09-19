@@ -1,0 +1,14 @@
+		(1)	(2)	(3)
+VARIABLES	LABELS	Score	Closure	Grade A
+				
+SCORE	Score	-0.236***	-0.00109***	0.00201***
+		(0.0157)	(0.000177)	(0.000533)
+SCORE_chain	Score $\times$ chain	-0.0901**	-3.45e-05	0.00307**
+		(0.0350)	(0.000231)	(0.00135)
+				
+Observations		149,831	149,831	149,831
+Inspection Date FE		YES	YES	YES
+Restaurant FE		YES	YES	YES
+dependent mean		21.08	0.0176	0.372
+Robust standard errors in parentheses				
+*** p<0.01, ** p<0.05, * p<0.1				

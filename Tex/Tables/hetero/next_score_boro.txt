@@ -1,0 +1,12 @@
+		(1)	(2)	(3)	(4)	(5)
+VARIABLES	LABELS	Manhattan	The Bronx	Brooklyn	Queens	Staten Isl.
+						
+SCORE	Score	-0.234***	-0.196***	-0.297***	-0.223***	-0.298**
+		(0.0189)	(0.0531)	(0.0221)	(0.0347)	(0.123)
+						
+Observations		61,351	13,852	35,098	34,202	4,378
+Inspection Date FE		YES	YES	YES	YES	YES
+Restaurant FE		YES	YES	YES	YES	YES
+dependent mean		21.10	20.46	21.08	21.52	19.22
+Robust standard errors in parentheses						
+*** p<0.01, ** p<0.05, * p<0.1						

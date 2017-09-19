@@ -1,0 +1,33 @@
+		(1)	(2)	(3)	(4)	(5)	(6)
+		Score					
+VARIABLES	LABELS	coef	se	> 50 Inspections	se	> 650 Inspections	se
+							
+SCORE	Score						
+last_score	last score	0.218***	(0.00746)	-0.000440	(0.00199)	-0.00193	(0.00205)
+2bn.last_grade	last_grade = 2b,	1.430***	(0.131)	0.0178	(0.0628)	0.0837	(0.0683)
+3.last_grade	last_grade = 3	1.495***	(0.206)	-0.0494	(0.0764)	0.0240	(0.0807)
+last_LO	last inspector propensity	-0.298***	(0.0104)	-0.00363	(0.00491)	-0.00529	(0.00551)
+chain_restaurant	chain	-3.644***	(0.179)	-0.0274	(0.0644)	-0.0300	(0.0734)
+sea_food_cuis	Sea Food	0.301	(0.412)	-0.0687	(0.129)	-0.0648	(0.136)
+chinese_cuis	Chinese	1.588***	(0.307)	-0.0952*	(0.0510)	-0.0511	(0.0546)
+pizza_italian_cuis	Pizza/Italian	0.305**	(0.118)	-0.0893***	(0.0342)	-0.0614	(0.0384)
+coffee_tea_cuis	Coffee/Tea	-2.219***	(0.162)	-0.0421	(0.0889)	-0.0514	(0.0966)
+latin_cuis	Latin	1.534***	(0.303)	-0.0714	(0.0556)	-0.0390	(0.0583)
+spanish_cuis	Spanish	1.560***	(0.261)	0.0125	(0.0615)	-0.0435	(0.0691)
+carribean_cuis	Carribean	1.542***	(0.288)	-0.0637	(0.0608)	-0.0619	(0.0544)
+sandwich_cuis	Sandwich	0.661**	(0.297)	-0.00916	(0.0472)	0.0180	(0.0488)
+10bn.venue	venue = 10b,	-4.379***	(0.722)	0.295	(0.197)	0.209	(0.211)
+14.venue	venue = 14, Fast Food Restaurant-Food Court	0.570***	(0.187)	0.0394	(0.0881)	-0.0211	(0.0868)
+23.venue	venue = 23, Restaurant (no bar)	1.453***	(0.158)	0.0449	(0.0662)	0.00343	(0.0641)
+buffet_serv	Buffet Service	2.564***	(0.365)	-0.182*	(0.107)	-0.196	(0.118)
+cater_serv	Cater Service	-1.897***	(0.609)	-0.200	(0.190)	-0.193	(0.219)
+counter_serv	Counter Service	-0.635***	(0.185)	0.0273	(0.0613)	0.0123	(0.0684)
+take_out_serv	Take-out Service	-1.410***	(0.185)	-0.153	(0.110)	-0.173	(0.123)
+wait_serv	Wait Service	1.205***	(0.166)	0.0418	(0.0481)	0.0404	(0.0525)
+cafeteria_serv	Cafeteria Service	-3.541***	(0.500)	-0.280*	(0.156)	-0.200	(0.168)
+LO_SCORE2	Inspector Propensity						
+							
+Observations		299,174		299,174		244,099	
+F Statistics		101.6		2.423		2.249	
+Robust standard errors in parentheses							
+*** p<0.01, ** p<0.05, * p<0.1							

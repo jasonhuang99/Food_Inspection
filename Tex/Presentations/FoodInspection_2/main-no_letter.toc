@@ -1,0 +1,13 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Background}{6}{0}{1}
+\beamer@sectionintoc {2}{Data}{7}{0}{2}
+\beamer@subsectionintoc {2}{1}{Food Inspection Data}{7}{0}{2}
+\beamer@subsectionintoc {2}{2}{311 Call Data}{8}{0}{2}
+\beamer@subsectionintoc {2}{3}{Yelp Data}{9}{0}{2}
+\beamer@sectionintoc {3}{Impact of Inspections on Restaurant Behaviors}{11}{0}{3}
+\beamer@subsectionintoc {3}{1}{Inspector Specific Stringencies as Instrument}{15}{0}{3}
+\beamer@subsectionintoc {3}{2}{Impact of Violation Citations on Restaurant Cleanliness}{20}{0}{3}
+\beamer@subsectionintoc {3}{3}{Multi-Tasking}{21}{0}{3}
+\beamer@subsectionintoc {3}{4}{Robustness}{26}{0}{3}
+\beamer@subsectionintoc {3}{5}{Complaint Calls}{29}{0}{3}
+\beamer@sectionintoc {4}{Conclusion}{32}{0}{4}
